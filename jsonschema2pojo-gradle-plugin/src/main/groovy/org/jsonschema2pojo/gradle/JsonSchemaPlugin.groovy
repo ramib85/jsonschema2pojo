@@ -48,7 +48,8 @@ class JsonSchemaPlugin implements Plugin<Project> {
 
           GenerateJsonSchemaAndroidTask task = (GenerateJsonSchemaAndroidTask) project.task(type: GenerateJsonSchemaAndroidTask, "generateJsonSchema2PojoFor${variant.name.capitalize()}") {
             source = config.source.collect { it }
-            outputDir = project.file("$project.buildDir/generated/source/js2p/$variant.flavorName/$variant.buildType.name/")
+            outputDir = configuration.targetDirectory ?:
+                    project.file("$project.buildDir/generated/source/js2p/$variant.flavorName/$variant.buildType.name/")
           }
 
           variant.registerJavaGeneratingTask(task, (File) task.outputDir)

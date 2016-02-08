@@ -66,9 +66,11 @@ jsonSchema2Pojo {
     //source = files("${sourceSets.main.output.resourcesDir}/json")
     source = files("${project.rootDir}/schema")
 
-    // Target directory for generated Java source files. The plugin will ignore this value for Android projects and will generate the classes into a generated source folder for each build variant and add this directory to the
-    // java source set so the compiler will find and compile the newly generated source files.
-    // targetDirectory = file("${project.rootDir}/build/generated-sources/js2p")
+    // Target directory for generated Java source files. This setting is optional.
+    // Under the target directory, the source files will be generated into $variant.flavorName/$variant.buildType.name
+    // If it is not specified, the default directory is $project.buildDir/generated/source/js2p
+    // This directory will be added to the source set of each build variant
+    targetDirectory = file("${project.rootDir}/build/generated-sources/js2p")
 
     // Package name used for generated Java classes (for types where a fully qualified name has not
     // been supplied in the schema using the 'javaType' property).
